@@ -1,5 +1,5 @@
 {
-  "name": "test-mocha",
+  "name": "experimental-meteor-mocha-electron",
   "private": true,
   "scripts": {
     "start": "meteor run",
@@ -10,5 +10,16 @@
     "debug": "^2.6.1",
     "meteor-node-stubs": "~0.2.0",
     "nightmare": "^2.9.1"
+  },
+  "devDependencies": {
+
+  },
+  "standard": {
+    "globals": [
+      "Meteor",
+      "describe",
+      "it",
+      "Package"
+    ]
   }
 }

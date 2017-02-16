@@ -1,19 +1,19 @@
 Package.describe({
-  name: "keyscores:mocha-browser",
-  summary: "Run package or app tests with Mocha reporting client results in a web browser",
-  git: "https://github.com/DispatchMe/meteor-mocha-browser.git",
-  version: '0.0.4',
-  testOnly: true,
-});
+  name: 'keyscores:mocha-browser',
+  summary: 'Run all tests with electron and nightmare',
+  git: 'https://github.com/keyscores/experimental-meteor-mocha-electron',
+  version: '0.0.1',
+  testOnly: true
+})
 
 Package.onUse(function (api) {
-  api.versionsFrom('1.3');
+  api.versionsFrom('1.3')
 
   api.use([
     'practicalmeteor:mocha-core@1.0.0',
-    'ecmascript',
-  ]);
+    'ecmascript'
+  ])
 
-  api.mainModule('client.js', 'client');
-  api.mainModule('server.js', 'server');
-});
+  api.mainModule('client.js', 'client')
+  api.mainModule('server.js', 'server')
+})

@@ -18,17 +18,17 @@ Meteor.methods({
     })
     .goto('http://localhost:3000')
     .evaluate(function () {
-      //client context
-      // mocha.run() // this is the client mocha
+      //  client context
+      //  mocha.run() // could call the client mocha from here
       return document.location.href
     })
     .end()
     .then(function (result) {
-      debug('sucess: ', result)
+      debug('success: ', result)
       // process.send('in child process ' + result)
     })
     .catch(function (error) {
-      console.error('Search failed:', error)
+      console.error('error:', error)
     })
   }
 })
@@ -37,6 +37,7 @@ Meteor.methods({
 function start () {
   // console.log('hello')
   Meteor.call('nightmareTest')
+  // server tests
   mochaInstance.run()
 }
 

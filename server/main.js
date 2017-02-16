@@ -1,12 +1,11 @@
-import { Meteor } from 'meteor/meteor';
+import { Meteor } from 'meteor/meteor'
 // const Nightmare = require('nightmare')
-
 
 Meteor.startup(() => {
   // code to run on server at startup
 
 //
-});
+})
 
 // Meteor.methods({
 //   nightmare:function(){
