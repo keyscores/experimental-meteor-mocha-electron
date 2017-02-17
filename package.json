@@ -4,7 +4,7 @@
   "scripts": {
     "start": "meteor run",
     "test": "TEST_WATCH=1 DEBUG='meteor-mocha:*' DEBUG_FD=1 DEBUG_COLORS=1 meteor test --full-app --driver-package keyscores:mocha-browser",
-    "dispatch": "meteor npm install && TEST_WATCH=1 TEST_BROWSER_DRIVER=nightmare meteor test --full-app --driver-package dispatch:mocha"
+    "dispatch": "meteor npm install && TEST_BROWSER_DRIVER=nightmare meteor test --once --full-app --driver-package dispatch:mocha"
   },
   "dependencies": {
     "babel-runtime": "^6.18.0",
