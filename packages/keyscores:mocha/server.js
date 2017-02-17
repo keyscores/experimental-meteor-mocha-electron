@@ -1,12 +1,13 @@
 // import { mochaInstance } from 'meteor/practicalmeteor:mocha-core'
 import { mochaInstance } from './core/server'
+import './lib/modules'
 
 const Nightmare = require('nightmare')
 const debug = require('debug')('meteor-mocha:test:server')
 
 mochaInstance.reporter('tap')
-mochaInstance.grep('Server')
-mochaInstance.invert = true //('Server')
+mochaInstance.grep(Modules.mochaOptions.grep)
+mochaInstance.options.invert = Modules.mochaOptions.grepInvert
 
 
 
