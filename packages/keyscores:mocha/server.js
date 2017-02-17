@@ -7,10 +7,6 @@ import './server/methods'
 const Nightmare = require('nightmare')
 const debug = require('debug')('meteor-mocha:test:server')
 
-
-
-
-
 Meteor.call("getOptions", function(err, res){
   console.log('getOPtions', res );
 })

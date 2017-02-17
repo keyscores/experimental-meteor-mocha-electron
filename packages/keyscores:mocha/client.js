@@ -9,14 +9,12 @@ import { RunnerOptions } from './lib/collection';
 // })
 
 function mochaRun(){
-  mocha.setup({
-    reporter: 'spec' //Modules.mochaOptions.reporter
-  })
+
 
   mocha.run((failCount) => {
     var testStateTemp = { failing: failCount }
     window.localStorage.testState = JSON.stringify(testStateTemp)
-    // window.testsDone
+    window.testsDone = true
 
   })
 
@@ -30,6 +28,10 @@ function runTests () {
     }
     if(result){
       console.log('result', result );
+      mocha.setup({
+        reporter: result.reporter
+      })
+
       mochaRun()
     }
   });
