@@ -9,8 +9,8 @@ function runTests () {
   console.log('client tests running')
 
   mocha.run((failCount) => {
-    var testStateTemp = { failing : failCount }
-    window.localStorage.testState  = JSON.stringify(testStateTemp)
+    var testStateTemp = { failing: failCount }
+    window.localStorage.testState = JSON.stringify(testStateTemp)
   })
 }
 

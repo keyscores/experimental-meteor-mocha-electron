@@ -4,13 +4,12 @@ const debug = require('debug')('meteor-mocha:test:server')
 
 mochaInstance.reporter('tap')
 
-
 var serverTest = function (cb) {
   console.log('Server Tests Running')
 
   mochaInstance.run(function (failureCount) {
-    var serverTestState = { failing: failureCount, passing: true  }
-    if ( failureCount > 0 ){
+    var serverTestState = { failing: failureCount, passing: true }
+    if (failureCount > 0) {
       serverTestState.passing = false
     }
     cb(serverTestState)
@@ -23,7 +22,7 @@ var clientTest = function (cb) {
 
   nightmare
   .on('console', function (type, msg) {
-    console.log('client logs: ', msg)
+    console.log(msg)
   })
   .on('did-finish-load', function () {
     debug('page loaded')
@@ -32,16 +31,15 @@ var clientTest = function (cb) {
   .evaluate(function () {
     //  client context
     //  mocha.run() // could call the client mocha from here
-    // console.log( JSON.stringify(window.localStorage) );
     var clientTestState = JSON.parse(window.localStorage.testState)
     if (clientTestState.failing && clientTestState.failing > 0) {
-      console.log('evaluate - Tests failing')
+      // console.log('evaluate - Tests failing')
       clientTestState.passing = false
     } else {
-      console.log('evaluate - Tests passing')
+      // console.log('evaluate - Tests passing')
       clientTestState.passing = true
     }
-    return clientTestState//document//
+    return clientTestState
   })
   .end()
   .then(function (result) {
@@ -70,16 +68,18 @@ function start () {
         console.log('Server Tests Failing')
       }
 
+      process.stdout.write('\x1b[35m') // debuging why no color in stdout
+
       if (clientTestState.passing && serverTestState.passing) {
         console.log('PASS')
         // process.exit(0)
       } else {
         console.log('FAIL')
+
         // process.exit(1)
       }
     })
   })
-  // server tests
 }
 
 export { start }
