@@ -1,4 +1,4 @@
-import { mocha } from 'meteor/practicalmeteor:mocha-core'
+import { mocha } from './core/client'
 
 mocha.setup({ reporter: 'tap' })
 

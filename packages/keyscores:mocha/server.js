@@ -1,8 +1,14 @@
-import { mochaInstance } from 'meteor/practicalmeteor:mocha-core'
+// import { mochaInstance } from 'meteor/practicalmeteor:mocha-core'
+import { mochaInstance } from './core/server'
+
 const Nightmare = require('nightmare')
 const debug = require('debug')('meteor-mocha:test:server')
 
 mochaInstance.reporter('tap')
+mochaInstance.grep('Server')
+mochaInstance.invert = true //('Server')
+
+
 
 var serverTest = function (cb) {
   console.log('Server Tests Running')
