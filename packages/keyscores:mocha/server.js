@@ -17,7 +17,7 @@ var serverTest = function (cb) {
   })
 }
 
-var nightmareTest = function (cb) {
+var clientTest = function (cb) {
   console.log('Client tests running')
   var nightmare = Nightmare({ show: false })
 
@@ -56,24 +56,21 @@ var nightmareTest = function (cb) {
 
 // Before Meteor calls the `start` function, app tests will be parsed and loaded by Mocha
 function start () {
-  var testState = []
   // console.log('hello')
-  nightmareTest(function (clientTestState) {
-    testState.push(clientTestState.passing)
+  clientTest(function (clientTestState) {
     if (clientTestState.passing) {
       console.log('Client Tests Passing')
     } else {
       console.log('Client Tests Failing')
     }
     serverTest(function (serverTestState) {
-      testState.push(serverTestState.passing)
       if (clientTestState.passing) {
-        console.log('Client Tests Passing')
+        console.log('Server Tests Passing')
       } else {
-        console.log('Client Tests Failing')
+        console.log('Server Tests Failing')
       }
 
-      if (testState.indexOf(false) === -1) {
+      if (clientTestState.passing &&  serverTestState.passing) {
         console.log('PASS')
         // process.exit(0)
       } else {

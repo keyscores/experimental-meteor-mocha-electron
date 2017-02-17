@@ -6,4 +6,8 @@ if (Meteor.isClient) {
       throw 'test'
     })
   })
+  describe('Client test', () => {
+    it('another test', () => {
+    })
+  })
 }
