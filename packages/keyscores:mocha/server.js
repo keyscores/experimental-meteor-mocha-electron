@@ -1,17 +1,26 @@
 // import { mochaInstance } from 'meteor/practicalmeteor:mocha-core'
 import { mochaInstance } from './core/server'
 import './lib/modules'
+import './lib/collection'
+import './server/methods'
 
 const Nightmare = require('nightmare')
 const debug = require('debug')('meteor-mocha:test:server')
 
-mochaInstance.reporter('tap')
-mochaInstance.grep(Modules.mochaOptions.grep)
-mochaInstance.options.invert = Modules.mochaOptions.grepInvert
 
+
+
+
+Meteor.call("getOptions", function(err, res){
+  console.log('getOPtions', res );
+})
 
 
 var serverTest = function (cb) {
+  mochaInstance.reporter(Modules.mochaOptions.reporter)
+  mochaInstance.grep(Modules.mochaOptions.grep)
+  mochaInstance.options.invert = Modules.mochaOptions.grepInvert
+
   console.log('Server Tests Running')
 
   mochaInstance.run(function (failureCount) {
@@ -27,14 +36,23 @@ var clientTest = function (cb) {
   console.log('Client tests running')
   var nightmare = Nightmare({ show: false })
 
+  // process.on('exit', () => {
+  //   if (nightmare) {
+  //     nightmare.end();
+  //   }
+  // });//
+
   nightmare
   .on('console', function (type, msg) {
-    console.log(msg)
+    console.log(msg)//
   })
   .on('did-finish-load', function () {
     debug('page loaded')
   })
   .goto('http://localhost:3000')
+  .wait(function () {
+    return window.testsDone
+  })
   .evaluate(function () {
     //  client context
     //  mocha.run() // could call the client mocha from here
@@ -55,12 +73,23 @@ var clientTest = function (cb) {
     // process.send('in child process ' + result)
   })
   .catch(function (error) {
-    console.error('error:', error)
+    debug('nightmare error:', error)
   })
 }
 
 // Before Meteor calls the `start` function, app tests will be parsed and loaded by Mocha
 function start () {
+  RunnerOptions.remove({})
+
+  var state = { type: 'mocha' }
+  state.options = {
+    grep : process.env.MOCHA_GREP,
+    grepInvert: grepInvert,
+    reporter: process.env.MOCHA_REPORTER || 'tap',
+  }
+  RunnerOptions.insert(state)
+  console.log('RunnerOptions server', RunnerOptions.find().fetch() );
+//
   // console.log('hello')
   clientTest(function (clientTestState) {
     if (clientTestState.passing) {

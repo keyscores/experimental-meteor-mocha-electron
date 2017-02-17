@@ -6,9 +6,10 @@ Package.describe({
   testOnly: true
 })
 
-// Npm.depends({
-//   mocha: '3.2.0'
-// });
+Npm.depends({
+  mocha: '3.2.0',
+  nightmare: '2.9.1'
+});
 
 Package.onUse(function (api) {
   api.versionsFrom('1.3')
