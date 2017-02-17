@@ -9,11 +9,10 @@
     "babel-runtime": "^6.18.0",
     "debug": "^2.6.1",
     "meteor-node-stubs": "~0.2.0",
-    "nightmare": "^2.9.1"
+    "nightmare": "^2.9.1",
+    "tap-spec-integrated": "^1.0.1"
   },
-  "devDependencies": {
-
-  },
+  "devDependencies": {},
   "standard": {
     "globals": [
       "Meteor",
