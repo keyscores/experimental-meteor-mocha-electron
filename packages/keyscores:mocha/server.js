@@ -64,13 +64,13 @@ function start () {
       console.log('Client Tests Failing')
     }
     serverTest(function (serverTestState) {
-      if (clientTestState.passing) {
+      if (serverTestState.passing) {
         console.log('Server Tests Passing')
       } else {
         console.log('Server Tests Failing')
       }
 
-      if (clientTestState.passing &&  serverTestState.passing) {
+      if (clientTestState.passing && serverTestState.passing) {
         console.log('PASS')
         // process.exit(0)
       } else {
