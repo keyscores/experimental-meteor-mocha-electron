@@ -1,0 +1,3 @@
+[submodule "packages/meteor-mocha"]
+	path = packages/meteor-mocha
+	url = git@github.com:keyscores/meteor-mocha.git
